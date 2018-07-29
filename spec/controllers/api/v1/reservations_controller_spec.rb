@@ -50,6 +50,54 @@ describe Api::V1::ReservationsController do
 
   end
 
+  context "When params doesn't contain all required details" do
+
+    it "it should throw validation message when guest count exceeds the capacity of table" do
+      @res = FactoryGirl.create(:restaurant_with_tables_and_shifts)
+
+      params = {
+        reservation: {
+          restaurant_table_id: RestaurantTable.last.id,
+          guests_count: 11,
+          restaurant_shift_id: RestaurantShift.last.id,
+          guest_email: "something@gmail.com",
+          guest_name: "Something",
+          reservation_from: "9am",
+          reservation_to: "10am"
+        }
+      }
+
+      post :create, params, format: 'json'
+      expect(json["error"]).to eq(true)
+      expect(json["errors"]).to include(
+        "Reservation Guest count doesn't match with table requirement")
+    end
+
+    it "it should throw validation message when reservation time doesn't match with the restaurant shift" do
+      @res = FactoryGirl.create(:restaurant_with_tables_and_shifts)
+      FactoryGirl.create(:restaurant_shift, name: "evening", start_time: "4pm", end_time: "8pm")
+
+      params = {
+        reservation: {
+          restaurant_table_id: RestaurantTable.last.id,
+          guests_count: 4,
+          restaurant_shift_id: RestaurantShift.last.id,
+          guest_email: "something@gmail.com",
+          guest_name: "Something",
+          reservation_from: "9am",
+          reservation_to: "10am"
+        }
+      }
+
+      post :create, params, format: 'json'
+      expect(json["error"]).to eq(true)
+      expect(json["errors"]).to include(
+        "Reservation time slot is out of restaurant shift")
+    end
+
+  end
+
+
   # context "when name or email is missing" do
   #   let(:params) do
   #     {
