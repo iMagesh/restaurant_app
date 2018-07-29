@@ -4,6 +4,7 @@ class CreateReservations < ActiveRecord::Migration
       t.references :restaurant_table, index: true, foreign_key: true
       t.datetime :reservation_from
       t.datetime :reservation_to
+      t.references :restaurant_shift
       t.references :guest, index: true, foreign_key: true
       t.integer :guests_count
 
