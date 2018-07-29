@@ -32,7 +32,7 @@ describe Api::V1::ReservationsController do
       expect(response.content_type).to eq "application/json"
     end
 
-    it 'it shoud contain the restaurant data' do
+    it 'it shoud contain the reservation data' do
       expect(json.keys).to include('id', 'restaurant_table_id', 'guests_count', 'restaurant_shift_id', 'guest_id', 'reservation_from', 'reservation_to')
       expect(json['restaurant_table_id']).to match(@res.restaurant_tables.last.id)
       expect(json['restaurant_shift_id']).to match(@res.restaurant_shifts.last.id)
@@ -40,6 +40,14 @@ describe Api::V1::ReservationsController do
       email = Guest.find(json['guest_id']).email
       expect(email).to match("something@gmail.com")
     end
+
+    it 'it should contain the correct reservation time' do
+      from_time = json['reservation_from'].to_datetime.strftime("%l%P")
+      to_time = json['reservation_to'].to_datetime.strftime("%l%P")
+      expect(from_time).to match("9am")
+      expect(to_time).to match("10am")
+    end
+
   end
 
   # context "when name or email is missing" do
