@@ -2,6 +2,15 @@ module Api
   module V1
     class ReservationsController < ApplicationController
 
+      def index
+        restaurant = Restaurant.find(params[:id])
+        if !restaurant.reservations.empty?
+          render json: restaurant.reservations, status: 200
+        else
+          render json: {}, error: "Sorry, No reservations"
+        end
+      end
+
       def create
         guest = Guest.find_by(email: params[:reservation][:guest_email])
         guest = Guest.register(params[:reservation][:guest_email], params[:reservation][:guest_name]) if guest.nil?
@@ -9,6 +18,15 @@ module Api
         params[:reservation][:guest_id] = guest.id
         reservation = restaurant_table.reservations.new(permitted_params)
         if reservation.save
+          render json: reservation, status: 200
+        else
+          render json: {error: true,errors: reservation.errors.full_messages.join(", ")}, status: 403
+        end
+      end
+
+      def update
+        reservation = Reservation.find(params[:id])
+        if reservation.update
           render json: reservation, status: 200
         else
           render json: {error: true,errors: reservation.errors.full_messages.join(", ")}, status: 403
