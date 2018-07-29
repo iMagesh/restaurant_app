@@ -48,7 +48,7 @@ describe Api::V1::GuestsController do
       }
     end
 
-    it "should render error messages for email" do
+    it "should render error messages for missing email" do
       post :create, params
       expect_forbidden_status
       expect_json_content
@@ -64,6 +64,15 @@ describe Api::V1::GuestsController do
       expect(json["error"]).to eq(true)
       expect(json["errors"]).to include(
         "Name can't be blank")
+    end
+
+    it "should render error messages for invalid email" do
+      post :create, {guest: {email: "testmagesh.com"}}
+      expect_forbidden_status
+      expect_json_content
+      expect(json["error"]).to eq(true)
+      expect(json["errors"]).to include(
+        "Email is invalid")
     end
 
   end
