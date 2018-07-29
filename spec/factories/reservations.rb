@@ -1,10 +1,14 @@
 FactoryGirl.define do
+
   factory :reservation do
-    restaurant_table nil
-reservation_from "2018-07-29 17:43:35"
-reservation_to "2018-07-29 17:43:35"
-guest nil
-guests_count 1
+
+    reservation_from "9am"
+    reservation_to "11am"
+    guests_count "5"
+
+    association :guest, factory: :guest, name: "magesh", email: "something@gmail.com"
+    association :restaurant_shift, factory: :restaurant_shift
+    association :restaurant_table, factory: :restaurant_table
   end
 
 end
