@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   api_version(:module => "Api::V1", path: {value: "api/v1"}) do
 
     resources :guests
+    resources :restaurants
 
     # mount_devise_token_auth_for 'User', at: '/auth/users', skip: [:omniauth_callbacks, :confirmations], controllers: {
     #     sessions: 'api/v1/users/sessions',
