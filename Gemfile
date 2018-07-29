@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-ruby  '2.2.2'
+ruby '2.2.2'
 
 # Must go before other gems
 gem 'dotenv-rails'
@@ -7,10 +7,10 @@ gem 'dotenv-rails'
 gem 'active_model_serializers', '0.9.3'
 #gem 'algoliasearch-rails'
 #gem 'angularjs-rails', '~> 1.4.0'
-gem 'bower'
+#gem 'bower'
 gem 'clearbit', github: 'johnkoht/clearbit-ruby'
 #gem 'cloudinary'
-#gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '~> 4.1.0'
 #gem 'devise'
 #gem 'domainatrix'
 #gem 'friendly_id', '~> 5.1.0'
@@ -45,16 +45,16 @@ group :development do
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
-  #gem 'html2haml'
-  #gem 'hub', :require=>nil
-  #gem 'quiet_assets'
-  #gem 'rails_apps_pages'
-  #gem 'rails_apps_testing'
-  #gem 'rails_layout'
-  #gem 'rb-fchange', :require=>false
-  #gem 'rb-fsevent', :require=>false
-  #gem 'rb-inotify', :require=>false
-  #gem 'seed_dump'
+  gem 'html2haml'
+  gem 'hub', :require=>nil
+  gem 'quiet_assets'
+  gem 'rails_apps_pages'
+  gem 'rails_apps_testing'
+  gem 'rails_layout'
+  gem 'rb-fchange', :require=>false
+  gem 'rb-fsevent', :require=>false
+  gem 'rb-inotify', :require=>false
+  gem 'seed_dump'
   gem 'spring-commands-rspec'
   gem 'byebug'
 end
