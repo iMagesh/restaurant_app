@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
     resources :guests
     resources :restaurants
+    resources :reservations
 
     # mount_devise_token_auth_for 'User', at: '/auth/users', skip: [:omniauth_callbacks, :confirmations], controllers: {
     #     sessions: 'api/v1/users/sessions',

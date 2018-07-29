@@ -3,13 +3,15 @@ module Api
     class ReservationsController < ApplicationController
 
       def create
-        @guest = Guest.find_by(email: params[guest_email])
-        @restaurant_table = RestaurantTable.find(params[restaurant_table_id])
-        @reservation = @restaurant_table.reservations.new(permitted_params)
-        if @reservation.save
-          render json: @reservation, status: 200
+        guest = Guest.find_by(email: params[:reservation][:guest_email])
+        guest = Guest.register(params[:reservation][:guest_email], params[:reservation][:guest_name]) if guest.nil?
+        restaurant_table = RestaurantTable.find(params[:reservation][:restaurant_table_id])
+        params[:reservation][:guest_id] = guest.id
+        reservation = restaurant_table.reservations.new(permitted_params)
+        if reservation.save
+          render json: reservation, status: 200
         else
-          render json: {error: true,errors: @reservation.errors.full_messages.join(", ")}, status: 403
+          render json: {error: true,errors: reservation.errors.full_messages.join(", ")}, status: 403
         end
       end
 
@@ -21,7 +23,8 @@ module Api
           :guest_id,
           :guests_count,
           :reservation_from,
-          :reservation_to
+          :reservation_to,
+          :restaurant_shift_id
         )
       end
 
