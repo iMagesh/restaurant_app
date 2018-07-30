@@ -8,7 +8,7 @@ Few seed data has been added for restaurants, restaurant_tables, restaurant_shif
 
 ## Doc
 
-Create restaurants
+**Create restaurants**
 
 POST https://magesh-restaurant.herokuapp.com/api/v1/restaurants
 
@@ -17,7 +17,7 @@ POST https://magesh-restaurant.herokuapp.com/api/v1/restaurants
 `email`
 `phone`
 
-Create guests
+**Create guests**
 
 POST https://magesh-restaurant.herokuapp.com/api/v1/guests
 
@@ -26,14 +26,14 @@ POST https://magesh-restaurant.herokuapp.com/api/v1/guests
 `name`
 `email`
 
-List reservations
+**List reservations**
 
 GET https://magesh-restaurant.herokuapp.com/api/v1/reservations/
 
 *Parameters:*
 `id`
 
-Create reservation
+**Create reservation**
 
 POST https://magesh-restaurant.herokuapp.com/api/v1/reservations
 
@@ -46,7 +46,7 @@ POST https://magesh-restaurant.herokuapp.com/api/v1/reservations
 `guest_email`
 `guest_name`
 
-Update reservation (pass the id along with url)
+**Update reservation (pass the id along with url)**
 
 PATCH https://magesh-restaurant.herokuapp.com/api/v1/restaurants/1
 
