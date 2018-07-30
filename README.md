@@ -14,6 +14,9 @@ https://magesh-restaurant.herokuapp.com/api/v1/restaurants
 Create guests
 https://magesh-restaurant.herokuapp.com/api/v1/guests
 
+List reservations
+https://magesh-restaurant.herokuapp.com/api/v1/reservations/
+
 Create reservation
 https://magesh-restaurant.herokuapp.com/api/v1/reservations
 
