@@ -15,7 +15,7 @@ class Reservation < ActiveRecord::Base
 
   def restaurant_shift_check
     if self.reservation_from && self.reservation_to && self.restaurant_shift
-      if self.reservation_from < self.restaurant_shift.start_time or self.reservation_to > self.restaurant_shift.end_time
+      if self.reservation_from.strftime("%H%M") < self.restaurant_shift.start_time.strftime("%H%M") or self.reservation_to.strftime("%H%M") > self.restaurant_shift.end_time.strftime("%H%M")
         errors.add(:reservation, "time slot is out of restaurant shift")
       end
     end
@@ -43,11 +43,11 @@ class Reservation < ActiveRecord::Base
   end
 
   def notify_email_guest
-    Notify_mailer.notify_email_guest.deliver
+    NotifyMailer.notify_email_guest(self).deliver
   end
 
   def notify_email_restaurant
-    Notify_mailer.notify_email_restaurant.deliver
+    NotifyMailer.notify_email_restaurant(self).deliver
   end
 
 

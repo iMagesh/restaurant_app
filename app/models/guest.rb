@@ -5,7 +5,7 @@ class Guest < ActiveRecord::Base
   validates :email, format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i }, presence: true
 
   def self.register(email, name)
-    guest = create(email: email, name: name)
+    guest = self.create!(email: email, name: name)
     return guest
   end
 
