@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Reservation, type: :model do
+
   it { should belong_to(:guest) }
   it { should belong_to(:restaurant_table) }
   it { should belong_to(:restaurant_shift)}
@@ -39,13 +40,13 @@ RSpec.describe Reservation, type: :model do
   end
 
   it 'is not valid when reservation time is out of restaurant shift time' do
-    FactoryGirl.create(:restaurant_with_tables_and_shifts)
+    restaurant = FactoryGirl.create(:restaurant_with_tables_and_shifts)
     reservation = Reservation.create(
-      guest_id: 1,
-      restaurant_table_id: 1,
+      guest: FactoryGirl.create(:guest),
+      restaurant_table: restaurant.restaurant_tables.last,
       reservation_from: Time.now,
       reservation_to: Time.now + 4.hours,
-      restaurant_shift_id: 1,
+      restaurant_shift: restaurant.restaurant_shifts.last,
       guests_count: 3
     )
     expect(reservation.errors).to_not be_empty
