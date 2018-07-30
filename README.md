@@ -2,7 +2,7 @@
 
 * Ruby 2.2.2
 
-## Date
+## Data
 
 Few seed data has been added for restaurants, restaurant_tables, restaurant_shifts, guests
 
@@ -20,4 +20,8 @@ https://magesh-restaurant.herokuapp.com/api/v1/reservations
 Update reservation (pass the id along with url)
 https://magesh-restaurant.herokuapp.com/api/v1/restaurants/1
 
+## Rspec Tests
+
+Use command:
+``rspec spec``
 
