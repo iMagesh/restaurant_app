@@ -12,6 +12,7 @@ class Reservation < ActiveRecord::Base
   validate :restaurant_shift_check, :table_availability
 
   after_create :notify_email_guest, :notify_email_restaurant
+  after_update :email_changes_guest
 
   def restaurant_shift_check
     if self.reservation_from && self.reservation_to && self.restaurant_shift
@@ -43,11 +44,15 @@ class Reservation < ActiveRecord::Base
   end
 
   def notify_email_guest
-    NotifyMailer.notify_email_guest(self).deliver
+    NotifyMailer.notify_email_guest(self).deliver_now
   end
 
   def notify_email_restaurant
-    NotifyMailer.notify_email_restaurant(self).deliver
+    NotifyMailer.notify_email_restaurant(self).deliver_now
+  end
+
+  def email_changes_guest
+    NotifyMailer.email_changes_guest(self, self.changes).deliver_now
   end
 
 

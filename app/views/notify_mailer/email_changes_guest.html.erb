@@ -1,0 +1,19 @@
+<p>
+  Hi <%= @reservation.guest.name %>,
+</p>
+<p>Your reservation has been updated. Please find the details below:</p>
+<ul>
+  <% if @reservation_changes.keys.include?('reservation_from') %>
+    <li>Old Reservation time: <%= @reservation_changes['reservation_from'][0].strftime("%l%P") %></li>
+    <li>New Reservation time: <%= @reservation_changes['reservation_from'][1].strftime("%l%P") %></li>
+  <% end %>
+  <% if @reservation_changes.keys.include?('guests_count') %>
+    <li>Old Guest count: <%= @reservation_changes['guests_count'][0] %></li>
+    <li>New Guest count: <%= @reservation_changes['guests_count'][1] %></li>
+  <% end %>
+</ul>
+<p>Have a great dining experience!</p>
+<p>
+  Regards,<br>
+  The awesome team at UM
+</p>

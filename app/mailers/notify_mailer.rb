@@ -14,4 +14,11 @@ class NotifyMailer < ApplicationMailer
     :subject => 'New booking has been made' )
   end
 
+  def email_changes_guest(reservation, reservation_changes)
+    @reservation = reservation
+    @reservation_changes = reservation_changes
+    mail( :to => @reservation.guest.email,
+    :subject => 'Your reservation has been updated' )
+  end
+
 end
