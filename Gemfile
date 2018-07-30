@@ -57,6 +57,7 @@ group :development do
   gem 'seed_dump'
   gem 'spring-commands-rspec'
   gem 'byebug'
+  gem "letter_opener"
 end
 
 group :development, :test do
