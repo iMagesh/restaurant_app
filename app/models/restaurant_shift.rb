@@ -1,5 +1,6 @@
 class RestaurantShift < ActiveRecord::Base
   belongs_to :restaurant
+  has_many :reservations
 
   validate :shift_start_end_time
 
