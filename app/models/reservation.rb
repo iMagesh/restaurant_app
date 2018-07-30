@@ -39,13 +39,15 @@ class Reservation < ActiveRecord::Base
   end
 
   def reservation_time
-    "#{self.reservation_from.strftime("%lP")} - #{self.reservation_to.strftime("%lP")}"
+    "#{self.reservation_from.strftime("%l%P")} - #{self.reservation_to.strftime("%l%P")}"
   end
 
   def notify_email_guest
+    Notify_mailer.notify_email_guest.deliver
   end
 
   def notify_email_restaurant
+    Notify_mailer.notify_email_restaurant.deliver
   end
 
 

@@ -1,0 +1,18 @@
+<p>
+  Hi <%= @reservation.restaurant_table.restaurant.name %> Admin,
+</p>
+<p>A new reservation has been made. Please find the details below:</p>
+<ul>
+  <li>Restaurant name: <%= @reservation.restaurant_table.restaurant.name %></li>
+  <li>Table name: <%= @reservation.restaurant_table.name %></li>
+  <li>Shift time: <%= @reservation.restaurant_shift.shift_time %> </li>
+  <li>Reservation time: <%= @reservation.reservation_time %></li>
+  <li>Guest Name: <%= @reservation.guest.name %></li>
+  <li>Guest email: <%= @reservation.guest.email %></li>
+  <li>Total Guest: <%= @reservation.guests_count %></li>
+</ul>
+<p>You can check the details on our ipad app.</p>
+<p>
+  Regards,<br>
+  The awesome team at UM
+</p>

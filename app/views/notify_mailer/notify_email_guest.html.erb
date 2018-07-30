@@ -1,12 +1,12 @@
 <p>
-  Hi <%= @guest.name %>,
+  Hi <%= @reservation.guest.name %>,
 </p>
 <p>Your reservation was successfull. Please find the details below:</p>
 <ul>
   <li>Restaurant name: <%= @reservation.restaurant_table.restaurant.name %></li>
   <li>Table name: <%= @reservation.restaurant_table.name %></li>
   <li>Reservation time: <%= @reservation.reservation_time %></li>
-  <li>Booked by: <%= @guest.name %></li>
+  <li>Booked by: <%= @reservation.guest.name %></li>
   <li>Total Guest: <%= @reservation.guests_count %></li>
 </ul>
 <p>Have a great dining experience!</p>
