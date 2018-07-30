@@ -98,54 +98,54 @@ describe Api::V1::ReservationsController do
   end
 
 
-  # context 'Update Reservation details' do
+  context 'Update Reservation details' do
 
 
-  #   before(:example) do
-  #     FactoryGirl.create(:restaurant_with_tables_and_shifts)
-  #     res = FactoryGirl.create(:reservation, params)
+    before(:example) do
+      @res = FactoryGirl.create(:reservation)
+    end
 
-  #     params = {
-  #       id: res.id,
-  #       reservation: {
-  #         restaurant_table_id: RestaurantTable.last.id,
-  #         guests_count: 4,
-  #         restaurant_shift_id: RestaurantShift.last.id,
-  #         guest_email: "something@gmail.com",
-  #         guest_name: "Something",
-  #         reservation_from: "9am",
-  #         reservation_to: "10am"
-  #       }
-  #     }
+    it 'responds with a 200 status code' do
+      params = {
+        id: @res.id,
+        reservation: {
+          reservation_from: "11am",
+          reservation_to: "12pm"
+        }
+      }
+      patch :update, params, format: 'json'
+      is_expected.to respond_with 200
+      expect(response.content_type).to eq "application/json"
 
-  #     patch :update, params, format: 'json'
-  #   end
+    end
 
-  #   it 'responds with a 200 status code' do
-  #     is_expected.to respond_with 200
-  #   end
+    it 'it should contain the updated reservation time' do
+      params = {
+        id: @res.id,
+        reservation: {
+          reservation_from: "11am",
+          reservation_to: "12pm"
+        }
+      }
+      patch :update, params, format: 'json'
+      from_time = json['reservation_from'].to_datetime.strftime("%l%P")
+      to_time = json['reservation_to'].to_datetime.strftime("%l%P")
+      expect(from_time).to match("11am")
+      expect(to_time).to match("12pm")
+    end
 
-  #   it 'returns json' do
-  #     expect(response.content_type).to eq "application/json"
-  #   end
+    it 'it should contain the updated guests count' do
+      params = {
+        id: @res.id,
+        reservation: {
+          guests_count: 6
+        }
+      }
+      patch :update, params, format: 'json'
+      expect(json['guests_count']).to match(6)
+    end
 
-  #   it 'it shoud contain the reservation data' do
-  #     expect(json.keys).to include('id', 'restaurant_table_id', 'guests_count', 'restaurant_shift_id', 'guest_id', 'reservation_from', 'reservation_to')
-  #     expect(json['restaurant_table_id']).to match(@res.restaurant_tables.last.id)
-  #     expect(json['restaurant_shift_id']).to match(@res.restaurant_shifts.last.id)
-  #     expect(json['guests_count']).to match(4)
-  #     email = Guest.find(json['guest_id']).email
-  #     expect(email).to match("something@gmail.com")
-  #   end
-
-  #   it 'it should contain the correct reservation time' do
-  #     from_time = json['reservation_from'].to_datetime.strftime("%l%P")
-  #     to_time = json['reservation_to'].to_datetime.strftime("%l%P")
-  #     expect(from_time).to match("9am")
-  #     expect(to_time).to match("10am")
-  #   end
-
-  # end
+  end
 
   context "List reservations for a given restaurant" do
 

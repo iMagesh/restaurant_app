@@ -26,7 +26,7 @@ module Api
 
       def update
         reservation = Reservation.find(params[:id])
-        if reservation.update
+        if reservation.update(permitted_params)
           render json: reservation, status: 200
         else
           render json: {error: true,errors: reservation.errors.full_messages.join(", ")}, status: 403
