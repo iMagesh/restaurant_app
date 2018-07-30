@@ -27,5 +27,14 @@ class Reservation < ActiveRecord::Base
     end
   end
 
+  def self.api_format
+    self.distinct.collect { |booking| {
+      guest_name: booking.guest.name,
+      guests_count: booking.guests_count,
+      table_name: booking.restaurant_table.name,
+      reservation_time: "#{booking.reservation_from.strftime("%lP")} - #{booking.reservation_to.strftime("%lP")}"
+    }}
+  end
+
 
 end

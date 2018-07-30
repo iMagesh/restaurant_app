@@ -157,6 +157,13 @@ describe Api::V1::ReservationsController do
     it "should contain a array of reservations data" do
       expect(json).not_to be_empty
     end
+
+    it "should containt the right set of information" do
+      expect(json['reservations'][0].keys).to include(
+        "guest_name", "guests_count", "table_name", "reservation_time"
+      )
+    end
+
   end
 
 

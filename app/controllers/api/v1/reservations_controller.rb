@@ -5,7 +5,7 @@ module Api
       def index
         restaurant = Restaurant.find(params[:id])
         if !restaurant.reservations.empty?
-          render json: restaurant.reservations, status: 200
+          render json: restaurant.reservations.api_format, status: 200
         else
           render json: {}, error: "Sorry, No reservations"
         end
