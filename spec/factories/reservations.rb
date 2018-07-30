@@ -1,12 +1,24 @@
 FactoryGirl.define do
 
+  # sequence :guests_count do |n|
+  #   n+1
+  # end
+
+  sequence :reservation_from do |n|
+    "#{n+8}am"
+  end
+
+  sequence :reservation_to do |n|
+    "#{n+9}am"
+  end
+
   factory :reservation do
 
-    reservation_from "9am"
-    reservation_to "11am"
-    guests_count "5"
+    reservation_from
+    reservation_to
+    guests_count 2
 
-    association :guest, factory: :guest, name: "magesh", email: "something@gmail.com"
+    association :guest, factory: :guest
     association :restaurant_shift, factory: :restaurant_shift
     association :restaurant_table, factory: :restaurant_table
   end
